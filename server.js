@@ -1,26 +1,20 @@
 var express = require('express');
 var favicon = require('serve-favicon');
 var app = express();
-var instagram = require('./inst.js')
+var inst = require('./inst.js')
 var fs = require('fs');
+var keys = require('./panda-config.js');
 
 app.use(express.static(__dirname + '/client'));
 app.use(favicon(__dirname + '/client/favicon/favicon.ico'));
 
 
-var yelpKey = {
- consumer_key: '5Sq5f8xENeanElUxNQogIA',
- consumer_secret: '8pNgr5EirL64rxeVbKW5ezK2rDs',
- token: 'LlUyfgNoFVSOBeJ3Y9fnKX-xdxdlFjgj',
- token_secret:  'iZg5iZFCDJviFtuDRBf_gje4bMw',
- ssl: true
-};
-
 var yelp = require("yelp").createClient({
-  consumer_key: yelpKey.consumer_key,
-  consumer_secret: yelpKey.consumer_secret,
-  token: yelpKey.token,
-  token_secret: yelpKey.token_secret,
+  consumer_key: keys.yelp.consumer_key,
+  consumer_secret: keys.yelp.consumer_secret,
+  token: keys.yelp.token,
+  token_secret: keys.yelp.token_secret,
+  ssl: true
 });
 
 var returnNum = 10;
@@ -37,7 +31,7 @@ var handleBizs = function(res) {
     var currentBiz = allBizs[t];
     output.push('<img src="' + currentBiz.image_url + '"><br>' + currentBiz.name + ' (' + currentBiz.id + ', ' + currentBiz.address + '): ' + currentBiz.rating + '/' + currentBiz.reviewCount + '<br>');
   }
-  // console.log('ye')
+  
   res.send(output.join());
 
 }
@@ -91,7 +85,9 @@ app.get('/yelpresults.html', function(req, res) {
 });
 
 
+
 var port = 3000;
 app.listen(port);
 
 console.log('Express server started on port %s', port);
+
