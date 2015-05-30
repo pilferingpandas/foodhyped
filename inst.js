@@ -11,6 +11,6 @@ instagram.set('client_secret', keys.instagram.client_secret);
  instagram.tags.recent({ name: 'sushirrito', 
     complete: function(data){
    
-    //console.log(data);
+    console.log(data);
     }
   });
