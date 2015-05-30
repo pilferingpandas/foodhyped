@@ -10,7 +10,8 @@ instagram.set('client_secret', keys.instagram.client_secret);
  // get data with tags for sushirrito
  instagram.tags.recent({ name: 'sushirrito', 
     complete: function(data){
+
    
     console.log(data);
-    }
+   }
   });
