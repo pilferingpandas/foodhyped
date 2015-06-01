@@ -2,7 +2,6 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var app = express();
 var inst = require('./inst.js')
-var fs = require('fs');
 var keys = require('./config/panda-config.js');
 
 app.use(express.static(__dirname + '/client'));
@@ -62,8 +61,8 @@ app.get('/yelpresults.html', function(req, res) {
 
        if (allBizs.length === biz.length) {
             // if allBizs have been pushed to our allBizs array (saved all details to allBizs array)
-            // console.log(allBizs)
-
+           console.log('fetching from yelp', allBizs[0])
+          // inst.getRestaurants(allBizs);
             handleBizs(res);
           }
 
