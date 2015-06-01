@@ -2,7 +2,6 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var app = express();
 var inst = require('./inst.js')
-var fs = require('fs');
 var keys = require('./config/panda-config.js');
 
 app.use(express.static(__dirname + '/client'));
@@ -56,14 +55,16 @@ app.get('/yelpresults.html', function(req, res) {
         reviewCount: business.review_count,
         rating: business.rating,
         image_url: business.image_url,
-        longitude : business.longitude,
-        latitude : business.latitude
+
+        longitude : business.location.coordinate.longitude,
+        latitude : business.location.coordinate.latitude
       });
 
        if (allBizs.length === biz.length) {
             // if allBizs have been pushed to our allBizs array (saved all details to allBizs array)
-            // console.log(allBizs)
-
+           console.log('fetching from yelp', allBizs[3])
+          // send restaurant names to inst.js for instagram search
+          inst.getRestaurants(allBizs);
             handleBizs(res);
           }
 
