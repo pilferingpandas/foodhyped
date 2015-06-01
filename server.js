@@ -55,13 +55,14 @@ app.get('/yelpresults.html', function(req, res) {
         reviewCount: business.review_count,
         rating: business.rating,
         image_url: business.image_url,
-        longitude : business.longitude,
-        latitude : business.latitude
+
+        longitude : business.location.coordinate.longitude,
+        latitude : business.location.coordinate.latitude
       });
 
        if (allBizs.length === biz.length) {
             // if allBizs have been pushed to our allBizs array (saved all details to allBizs array)
-          // console.log('fetching from yelp', allBizs[0].name)
+           console.log('fetching from yelp', allBizs[3])
           // send restaurant names to inst.js for instagram search
           inst.getRestaurants(allBizs);
             handleBizs(res);

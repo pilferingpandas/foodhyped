@@ -13,10 +13,12 @@ exports.getRestaurants = function (restaurants){
     // check instagram for every restaurant (provide name + coordinates)
     // console.log(restaurants[i].name);
     var resName = restaurants[i].name;
-    myStr=resName.replace(/\s+/g, "+");
-    myStr=myStr.split('+');
     // escape single quotes in the name
-    //resName = resName.replace(/'/g, "\\'");
+    resName = resName.replace(/'/g, "\\'");
+    myStr=resName.replace(/\s+/g, "\\");
+    myStr=myStr.split('\\');
+    
+    //
     var name = [];
     name.push(myStr);
     // console.log(name[0])
@@ -28,15 +30,16 @@ var checkInstagram = function (name){
   //console.log('searching for restaurant called ', name[0][0])
   // currently only searching for one word names
   // to search for two worded names: name : 'Saigon'+'Sandwich'
+  console.log(name[0][0])
   instagram.tags.recent({ name: name[0][0], 
     complete: function(data){
-      //console.log(data);
+      // console.log(data);
     },
   });
 };
 
 
-//  the stuff below will work if yelp provided coordinates
+//  the stuff below will work if yelp orovi
 //  // calling 'instagram.tags.recent' using a restaurant name i.e. name: 'sushirrito', will fetch
 //  // objects with tags using this name
 //  instagram.tags.recent({ name: 'sushirrito', 
