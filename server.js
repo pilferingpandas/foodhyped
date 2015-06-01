@@ -61,8 +61,9 @@ app.get('/yelpresults.html', function(req, res) {
 
        if (allBizs.length === biz.length) {
             // if allBizs have been pushed to our allBizs array (saved all details to allBizs array)
-           console.log('fetching from yelp', allBizs[0])
-          // inst.getRestaurants(allBizs);
+          // console.log('fetching from yelp', allBizs[0].name)
+          // send restaurant names to inst.js for instagram search
+          inst.getRestaurants(allBizs);
             handleBizs(res);
           }
 
